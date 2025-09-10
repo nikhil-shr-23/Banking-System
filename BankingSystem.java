@@ -12,8 +12,6 @@ public class BankingSystem {
         System.out.print("Enter your name? ");
         String name = scanner.nextLine();
 
-
-        //Gender Selection herer
         String genderChoice;
         while (true) {
             System.out.println("Select your gender:");
@@ -28,8 +26,6 @@ public class BankingSystem {
             System.out.println("Please enter M, F, or N-B.");
         }
 
-
-        //Else ifs for choosing Geneder
         String title;
         if (genderChoice.equals("M")) {
             title = "Mr";
@@ -39,15 +35,23 @@ public class BankingSystem {
             title = "Mx";
         }
 
-        // regex to remove 
         String firstName = name.trim().split("\\S+")[0];
         
-
-        //here we are generating random account number for user -> task 1)
         Random random = new Random();
         int rando100 = random.nextInt(100);
         String accountNumber = Integer.toString(rando100);
         System.out.println("Aapka Account Number hai: " + accountNumber);
+        
+        //  Object Instantiation - creating an instance of BankAccount class
+        BankAccount account = new BankAccount(name, accountNumber, 0);
+        
+        String password = createPassword(scanner);
+        //  Encapsulation - using setter method to set private field
+        account.setPassword(password);
+        
+        String pin = createPin(scanner);
+        //  Encapsulation - using setter method to set private field
+        account.setPin(pin);
         
         System.out.print("Enter initial balance: ");
         double initialBalance = 0;
@@ -65,16 +69,7 @@ public class BankingSystem {
             }
         }
         
-        // OOP Concept: Object Instantiation - creating an instance of BankAccount class
-        BankAccount account = new BankAccount(name, accountNumber, initialBalance);
-        
-        String password = createPassword(scanner);
-        // OOP Concept: Encapsulation - using setter method to set private field
-        account.setPassword(password);
-        
-        String pin = createPin(scanner);
-        // OOP Concept: Encapsulation - using setter method to set private field
-        account.setPin(pin);
+        account.balance = initialBalance;
         
         System.out.println("\nAccount created successfully!");
         System.out.println("Hello " + title + " " + firstName + "!");
@@ -125,22 +120,20 @@ public class BankingSystem {
         scanner.close();
     }
     
-    // OOP Concept: Encapsulation - private method that handles deposit operation
-    private static void handleDeposit(BankAccount account, Scanner scanner) {
+    private static void handleDeposit(Account account, Scanner scanner) {
         System.out.print("\nEnter amount to deposit: ");
         double amount = getValidAmount(scanner);
         if (amount > 0) {
-            // OOP Concept: Method Invocation - calling object's method
+            //  Polymorphism - calling overridden method
             account.deposit(amount);
         }
     }
     
-    // OOP Concept: Encapsulation - private method that handles withdrawal operation
-    private static void handleWithdraw(BankAccount account, Scanner scanner) {
+    private static void handleWithdraw(Account account, Scanner scanner) {
         System.out.print("\nEnter amount to withdraw: ");
         double amount = getValidAmount(scanner);
         if (amount > 0) {
-            // OOP Concept: Method Invocation - calling object's method
+            // OOP Concept: Polymorphism - calling overridden method
             account.withdraw(amount);
         }
     }
@@ -193,13 +186,12 @@ public class BankingSystem {
         }
     }
     
-    // OOP Concept: Method Overloading - same method name with different parameters
-    private static boolean verifyPasswordOrPin(BankAccount account, Scanner scanner) {
+    private static boolean verifyPasswordOrPin(Account account, Scanner scanner) {
         int attempts = 0;
         while (attempts < 3) {
             System.out.print("Enter your password or PIN: ");
             String input = scanner.nextLine();
-            // OOP Concept: Encapsulation - using private methods to verify credentials
+            //Encapsulation - using private methods to verify credentials
             if (account.verifyPassword(input) || account.verifyPin(input)) {
                 return true;
             }
@@ -213,7 +205,7 @@ public class BankingSystem {
         return false;
     }
     
-    private static void resetPassword(BankAccount account, Scanner scanner) {
+    private static void resetPassword(Account account, Scanner scanner) {
         System.out.println("Password reset:");
         String newPassword = createPassword(scanner);
         account.resetPassword(newPassword);
