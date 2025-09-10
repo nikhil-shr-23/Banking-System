@@ -12,7 +12,7 @@ public class BankAccount {
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
-            System.out.println("Deposit successful! New balance: $" + String.format("%.2f", balance));
+            System.out.println("Deposit successful! New balance: " + String.format("%.2f", balance));
         } else {
             System.out.println("Invalid amount! Please enter a positive value.");
         }
@@ -22,9 +22,9 @@ public class BankAccount {
         if (amount > 0) {
             if (amount <= balance) {
                 balance -= amount;
-                System.out.println("Withdrawal successful! New balance: $" + String.format("%.2f", balance));
+                System.out.println("Withdrawal successful! New balance: " + String.format("%.2f", balance));
             } else {
-                System.out.println("Insufficient funds! Current balance: $" + String.format("%.2f", balance));
+                System.out.println("Insufficient funds! Current balance: " + String.format("%.2f", balance));
             }
         } else {
             System.out.println("Invalid amount! Please enter a positive value.");
@@ -34,7 +34,7 @@ public class BankAccount {
     public void checkBalance() {
         System.out.println("Account Holder: " + name);
         System.out.println("Account Number: " + accountNumber);
-        System.out.println("Current Balance: $" + String.format("%.2f", balance));
+        System.out.println("Current Balance: " + String.format("%.2f", balance));
     }
     
     public String getName() {
