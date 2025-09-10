@@ -7,3 +7,4 @@ constraints to add ->  M F T -> mr/mrs and name trimming
 
 password -> strings option -> minimum length 8 characters, pin option too inside this system.
 
+

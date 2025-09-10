@@ -38,6 +38,8 @@ public class BankingSystem {
         } else {
             title = "Mx";
         }
+
+        // to learn - regex 
         String firstName = name.trim().split("\\s+")[0];
         
 
