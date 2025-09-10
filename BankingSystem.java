@@ -155,12 +155,12 @@ public class BankingSystem {
     
     private static String createPassword(Scanner scanner) {
         while (true) {
-            System.out.print("Create a password (min 7 chars, must include letters, numbers, special chars): ");
+            System.out.print("Create a passwrd (min 7 chars, must include letters, numbers, special chars): ");
             String password = scanner.nextLine();
             if (isValidPassword(password)) {
                 return password;
             }
-            System.out.println("Password must be at least 7 characters and contain letters, numbers, and special characters.");
+            System.out.println("Passwrd must be at least 7 characters and contain letters, numbers, and special characters.");
         }
     }
     
